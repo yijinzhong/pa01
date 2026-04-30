@@ -13,7 +13,8 @@ int main(int argv, char** argc){
     cout << "Please provide 2 file names" << endl;
     return 1;
   }
-  
+  CardList alice;
+  CardList bob;
   ifstream cardFile1 (argc[1]);
   ifstream cardFile2 (argc[2]);
   string line;
@@ -25,16 +26,23 @@ int main(int argv, char** argc){
 
   //Read each file
   while (getline (cardFile1, line) && (line.length() > 0)){
+ char suit = line[0];
+string value = line.substr(2);
+alice.insert(Card(suit, value));
 
   }
   cardFile1.close();
 
 
   while (getline (cardFile2, line) && (line.length() > 0)){
+char suit = line[0];
+string value = line.substr(2);
+bob.insert(Card(suit, value));
 
   }
   cardFile2.close();
-  
+  playGame(alice, bob);
+
   
   return 0;
 }

@@ -14,6 +14,9 @@ int main(int argv, char** argc){
     return 1;
   }
   
+  set<Card> alice;
+set<Card> bob;
+
   ifstream cardFile1 (argc[1]);
   ifstream cardFile2 (argc[2]);
   string line;
@@ -23,18 +26,62 @@ int main(int argv, char** argc){
     return 1;
   }
 
-  //Read each file
+
   while (getline (cardFile1, line) && (line.length() > 0)){
+  char suit = line[0];
+  string value = line.substr(2);
+  alice.insert(Card(suit, value));
 
   }
   cardFile1.close();
 
 
   while (getline (cardFile2, line) && (line.length() > 0)){
+    char suit = line[0];
+ string value = line.substr(2);
+ bob.insert(Card(suit, value));
 
   }
   cardFile2.close();
   
+
+bool running = true;
+while(running){
+    bool aliceFound = false;
+    for(auto it = alice.begin(); it != alice.end(); ++it){
+        if(bob.count(*it)){
+            cout << "Alice picked matching card " << *it << endl;
+            bob.erase(*it);
+            alice.erase(it);
+            aliceFound = true;
+            break;
+        }
+    }
+    if(!aliceFound) break;
+
+    bool bobFound = false;
+    for(auto it = prev(bob.end()); ; --it){
+        if(alice.count(*it)){
+            cout << "Bob picked matching card " << *it << endl;
+            alice.erase(*it);
+            bob.erase(it);
+            bobFound = true;
+            break;
+        }
+        if(it == bob.begin()) break;
+    }
+    if(!bobFound) break;
+}
+
+cout << "Alice's cards:" << endl;
+for(auto it = alice.begin(); it != alice.end(); ++it)
+    cout << *it << endl;
+cout << "Bob's cards:" << endl;
+for(auto it = bob.begin(); it != bob.end(); ++it)
+    cout << *it << endl;
+ 
+
+ 
   
   return 0;
 }
