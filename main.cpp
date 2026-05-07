@@ -25,23 +25,22 @@ int main(int argv, char** argc){
   }
 
   //Read each file
-  while (getline (cardFile1, line) && (line.length() > 0)){
- char suit = line[0];
-string value = line.substr(2);
-alice.insert(Card(suit, value));
+while (getline(cardFile1, line)){
+    if (line.length() == 0) continue;
+    char suit = line[0];
+    string value = line.substr(2);
+    alice.insert(Card(suit, value));
+}
+cardFile1.close();
 
-  }
-  cardFile1.close();
-
-
-  while (getline (cardFile2, line) && (line.length() > 0)){
-char suit = line[0];
-string value = line.substr(2);
-bob.insert(Card(suit, value));
-
-  }
-  cardFile2.close();
-  playGame(alice, bob);
+while (getline(cardFile2, line)){
+    if (line.length() == 0) continue;
+    char suit = line[0];
+    string value = line.substr(2);
+    bob.insert(Card(suit, value));
+}
+cardFile2.close();
+playGame(alice, bob);
 
   
   return 0;
