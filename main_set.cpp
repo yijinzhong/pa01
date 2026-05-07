@@ -75,12 +75,15 @@ while(running){
     if(!bobFound) break;
 }
 
+cout << endl;
 cout << "Alice's cards:" << endl;
 for(auto it = alice.begin(); it != alice.end(); ++it)
     cout << *it << endl;
+cout << endl;
 cout << "Bob's cards:" << endl;
 for(auto it = bob.begin(); it != bob.end(); ++it)
     cout << *it << endl;
+
  
 
  
