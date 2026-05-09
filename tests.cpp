@@ -106,5 +106,80 @@ int main(){
     bob3.insert(Card('h', "5"));
     playGame(alice3, bob3);
 
+    // 测试17：remove后正向遍历
+CardList tree3;
+tree3.insert(Card('c', "3"));
+tree3.insert(Card('h', "5"));
+tree3.insert(Card('s', "10"));
+tree3.insert(Card('d', "7"));
+tree3.remove(Card('h', "5")); // 删除有两个子节点的节点
+cout << "Test 17 - Forward after remove: ";
+for(auto it = tree3.begin(); it != tree3.end(); ++it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试18：remove root后遍历
+CardList tree4;
+tree4.insert(Card('h', "5"));
+tree4.insert(Card('c', "3"));
+tree4.insert(Card('s', "10"));
+tree4.remove(Card('h', "5")); // 删除root
+cout << "Test 18 - Forward after remove root: ";
+for(auto it = tree4.begin(); it != tree4.end(); ++it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试19：remove后反向遍历
+cout << "Test 19 - Reverse after remove: ";
+for(auto it = tree4.rbegin(); it != tree4.rend(); --it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试20：只剩一个节点时遍历
+CardList tree5;
+tree5.insert(Card('c', "3"));
+tree5.insert(Card('h', "5"));
+tree5.remove(Card('h', "5"));
+cout << "Test 20 - One node left forward: ";
+for(auto it = tree5.begin(); it != tree5.end(); ++it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试21：大量插入后正向遍历
+CardList tree6;
+tree6.insert(Card('c', "5"));
+tree6.insert(Card('c', "3"));
+tree6.insert(Card('c', "7"));
+tree6.insert(Card('c', "1"));  // 用a代替
+tree6.insert(Card('c', "9"));
+tree6.insert(Card('c', "2"));
+tree6.insert(Card('c', "k"));
+tree6.insert(Card('c', "j"));
+tree6.insert(Card('c', "4"));
+tree6.insert(Card('c', "6"));
+cout << "Test 21 - Large tree forward: ";
+for(auto it = tree6.begin(); it != tree6.end(); ++it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试22：删叶子节点后遍历
+CardList tree7;
+tree7.insert(Card('c', "5"));
+tree7.insert(Card('c', "3"));
+tree7.insert(Card('c', "7"));
+tree7.remove(Card('c', "3")); // 删最小叶子
+cout << "Test 22 - Remove min leaf forward: ";
+for(auto it = tree7.begin(); it != tree7.end(); ++it)
+    cout << *it << " ";
+cout << endl;
+
+// 测试23：删最大叶子后反向遍历
+tree7.remove(Card('c', "7")); // 删最大叶子
+cout << "Test 23 - Remove max leaf reverse: ";
+for(auto it = tree7.rbegin(); it != tree7.rend(); --it)
+    cout << *it << " ";
+cout << endl;
+
+
     return 0;
 }

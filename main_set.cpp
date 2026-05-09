@@ -61,6 +61,8 @@ while(running){
     }
     if(!aliceFound) break;
 
+    if(bob.empty())break;
+
     bool bobFound = false;
     for(auto it = prev(bob.end()); ; --it){
         if(alice.count(*it)){
